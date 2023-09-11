@@ -1,25 +1,28 @@
 package exercise;
 
-//import java.util.Arrays;
+import java.util.Arrays;
 //import java.util.ArrayList;
 import java.util.List;
 
 // BEGIN
 class App {
-    public static boolean scrabble(List<String> symbolList, String word) {
-        String[] parts = word.split("");
+    public static boolean scrabble(String symbols, String text) {
+        String[] arrayWithSymbols = symbols.split("");
+        List<String> listWithSymbols = Arrays.asList(arrayWithSymbols);
+        String[] arrayWithWord = text.split("");
+        List<String> listWithWord = Arrays.asList(arrayWithWord);
 
-        if (symbolList.isEmpty()) {
+        if (listWithSymbols.isEmpty() || listWithSymbols.size() < listWithWord.size()) {
             return false;
         }
 
-        if (symbolList.size() >= word.length()) {
-            for (String part : parts) {
-                for (String symbol : symbolList) {
+        if (listWithSymbols.size() >= listWithWord.size()) {
+            for (String word : listWithWord) {
+                for (String symbol : listWithSymbols) {
 
-                    boolean ans = symbol.equalsIgnoreCase(part);
+                    boolean ans = symbol.equalsIgnoreCase(word);
                     if (ans) {
-                        symbolList.remove(part);
+                        listWithSymbols.remove(word);
                     }
                     else {
                         return false;
