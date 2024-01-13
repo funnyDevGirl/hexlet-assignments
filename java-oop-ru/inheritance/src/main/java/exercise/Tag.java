@@ -24,17 +24,12 @@ public class Tag {
     }
 
     protected String toStringForSingleTag() {
-        /*StringBuilder result = new StringBuilder("<" + tagName + " ");
-        for (Map.Entry<String, String> attribute : new LinkedHashMap<>(attributes).entrySet()) {
-            result.append(attribute.getKey() + "=\"" + attribute.getValue() + "\" ");
-        }
-        result.deleteCharAt(result.length() - 1).append(">");
-        return result.toString();*/
 
-        return Stream.of("<", tagName).collect(Collectors.joining("")) +
-                new LinkedHashMap<>(attributes).entrySet().stream()
-                        .map(a -> (" " + a.getKey() + "=\"" + a.getValue() + "\""))
-                        .collect(Collectors.joining("")) + ">";
+        String attr = attributes.entrySet().stream()
+                .map(a -> String.format(" %s=\"%s\"", a.getKey(), a.getValue()))
+                .collect(Collectors.joining(""));
+
+        return String.format("<%s%s>", tagName, attr);
     }
 }
 // BEGIN

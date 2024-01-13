@@ -20,10 +20,9 @@ public class PairedTag extends Tag {
         String child = childrens.stream()
                 .map(Tag::toString)
                 .collect(Collectors.joining(""));
-        return toStringForSingleTag() +
-                child + bodyTag +
-                "</" + getTagName() +
-                ">";
+
+        return String.format("%s%s%s</%s>",
+                toStringForSingleTag(), child, bodyTag, getTagName());
     }
 }
 // END
