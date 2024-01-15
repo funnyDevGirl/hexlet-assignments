@@ -1,9 +1,7 @@
 package exercise;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 // BEGIN
 class Validator {
@@ -24,7 +22,6 @@ class Validator {
 
                 try {
                     if (Objects.isNull(field.get(address))) {
-                    //if (field.get(address) == null) {
                         result.add(field.getName());
                     }
                 } catch (IllegalAccessException e) {
@@ -33,6 +30,63 @@ class Validator {
             }
         }
         return result;
+    }
+
+    public static Map<String, List<String>> advancedValidate(Address address) {
+
+        Map<String, List<String>> result = new HashMap<>();
+
+        //список с именами полей, не прошедших валидацию с NotNull:
+        List<String> fieldNames = validate(address);
+
+        Field[] fields = address.getClass().getDeclaredFields();
+
+        for (Field field : fields) {
+            field.setAccessible(true);
+
+            //если поле содержит обе аннотацияи (NotNull, MinLength):
+            if (field.isAnnotationPresent(MinLength.class)) {
+
+                try {
+                    List<String> messages = getMessagesOfAllAnnotation(address, field);
+                    if (!messages.isEmpty()) {
+                        result.put(field.getName(), messages);
+                    }
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            //если у поля только NotNull:
+            else {
+                if (fieldNames.contains(field.getName())) {
+                    result.put(field.getName(), List.of("can not be null"));
+                }
+            }
+        }
+        return result;
+    }
+
+    //метод возвращает список сообщений у полей, не прошедших валидацию с MinLength:
+    public static List<String> getMessagesOfAllAnnotation(Address address, Field field)
+            throws IllegalAccessException {
+
+        List<String> messages = new ArrayList<>();
+
+        //список с именами полей, не прошедших валидацию с NotNull:
+        List<String> fieldNames = validate(address);
+        //получаю значение у аннотации:
+        int value = field.getAnnotation(MinLength.class).minLength();
+        //получаю длину у значения поля:
+        int nameLength = String.valueOf(field.get(address)).length();
+
+        if (fieldNames.contains(field.getName())) {
+            messages.add("can not be null");
+
+            if (nameLength < value) {
+                messages.add("length less than " + value);
+            }
+        }
+        return messages;
     }
 }
 
