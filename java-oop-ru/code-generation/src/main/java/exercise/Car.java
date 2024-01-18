@@ -17,27 +17,23 @@ class Car {
     //возвращает JSON представление объекта (в виде строки)
     public String serialize() {
         ObjectMapper mapper = new ObjectMapper();
-        String json = "";
         try {
-            json =  mapper.writeValueAsString(this);
+            return mapper.writeValueAsString(this);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return json;
+        //return json;
     }
 
     //возвращает объект класса Car с соответствующими свойствами
     public static Car unserialize(String json) {
 
         ObjectMapper mapper = new ObjectMapper();
-        Car car;
         try {
-            car = mapper.readValue(json, Car.class);
-            //return mapper.readValue(json, Car.class);
+            return mapper.readValue(json, Car.class);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return car;
     }
     // END
 }

@@ -4,6 +4,9 @@ import lombok.*;
 
 // BEGIN
 @Value
+@AllArgsConstructor
+@NoArgsConstructor
+@RequiredArgsConstructor
 // END
 class User {
     int id;
