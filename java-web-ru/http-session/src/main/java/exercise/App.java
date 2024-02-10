@@ -16,10 +16,23 @@ public final class App {
 
         // BEGIN
         app.get("/users", ctx -> {
-            ctx.json(USERS);
-            //users?page=5&per=3:
-            var page = ctx.queryParamAsClass("page", Integer.class).getOrDefault(5);
-            var per = ctx.queryParamAsClass("per", Integer.class).getOrDefault(3);
+
+            var page = ctx.queryParamAsClass("page", Integer.class).getOrDefault(1);
+            var per = ctx.queryParamAsClass("per", Integer.class).getOrDefault(5);
+
+            ctx.json(
+                    USERS.stream()
+                            .skip((long) Math.max(page - 1, 0) * per)
+                            .limit(per)
+                            .toList()
+            );
+
+            //2 вариант:
+//            var startIndex = per * (page - 1);
+//            //на случай, если останется меньше минимального кол-ва элементов, исп-ем Math.min():
+//            var endIndex = Math.min(startIndex + per, USERS.size());
+//
+//            ctx.json(USERS.subList(startIndex, endIndex));
         });
         // END
 
