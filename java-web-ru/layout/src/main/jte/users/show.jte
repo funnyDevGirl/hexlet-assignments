@@ -7,15 +7,13 @@
         <table>
             <thead>
                 <tr>
-                    <th>FirstName</th>
-                    <th>LastName</th>
+                    <th>FirstName LastName</th>
                     <th>Email</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>${page.getUser().getFirstName()}</td>
-                    <td>${page.getUser().getLastName()}</td>
+                    <td>${page.getUser().getFirstName()} ${page.getUser().getLastName()}</td>
                     <td>${page.getUser().getEmail()}</td>
                 </tr>
             </tbody>
