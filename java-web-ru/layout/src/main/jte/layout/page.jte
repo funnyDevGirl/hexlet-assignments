@@ -2,10 +2,6 @@
 @param Content content
 @param Content footer = null
 
-
-
-
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -18,7 +14,6 @@
           crossorigin="anonymous">
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
@@ -31,18 +26,15 @@
         </ul>
     </div>
 </nav>
-
 <div class="mx-auto p-4 py-md-5">
     ${content}
 </div>
-
 @if (footer != null)
-    <footer class="text-center text-lg-start bg-light text-muted">
-        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-            ${footer}
-        </div>
-    </footer>
+<footer class="text-center text-lg-start bg-light text-muted">
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+        ${footer}
+    </div>
+</footer>
 @endif
-
 </body>
 </html>
