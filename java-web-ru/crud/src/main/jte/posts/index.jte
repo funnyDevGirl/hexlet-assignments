@@ -5,17 +5,22 @@
 @template.layout.page(
 content = @`
     <div class="mx-auto p-4 py-md-5">
-        <a href="${NamedRoutes.postsPath()}">Все посты</a>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="${NamedRoutes.postsPath()}">Все посты</a>
+            </li>
+        </ul>
+
+        <br>
 
         @if(page.getPosts().isEmpty())
             <p>Пока не добавлено ни одного поста!</p>
         @else
-            <table class="container">
+            <table class="table">
                 <thead>
                 <tr>
                     <th>Post's id</th>
                     <th>Name</th>
-                    <th>Post</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -23,7 +28,6 @@ content = @`
                     <tr>
                         <td><a href="${NamedRoutes.postPath(post.getId())}">${post.getId()}</a></td>
                         <td><a href="${NamedRoutes.postPath(post.getId())}">${post.getName()}</a></td>
-                        <td><a href="${NamedRoutes.postPath(post.getId())}">${post.toString()}</a></td>
                     </tr>
                 @endfor
                 </tbody>
