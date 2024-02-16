@@ -10,7 +10,7 @@ content = @`
         @if(page.getPosts().isEmpty())
             <p>Пока не добавлено ни одного поста!</p>
         @else
-            <table>
+            <table class="container">
                 <thead>
                 <tr>
                     <th>Post's id</th>
