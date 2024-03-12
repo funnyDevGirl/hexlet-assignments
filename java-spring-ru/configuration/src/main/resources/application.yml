@@ -1,0 +1,16 @@
+---
+# BEGIN
+logging:
+  level:
+    root: WARN
+
+server:
+  port : 7070
+# END
+
+users:
+  admins:
+    - gjoinsey1@blogger.com
+    - scrosi4@cam.ac.uk
+    - scrosi4@cam.ac.uk
+
