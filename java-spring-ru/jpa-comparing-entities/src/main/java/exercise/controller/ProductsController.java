@@ -36,13 +36,18 @@ public class ProductsController {
     @ResponseStatus(HttpStatus.CREATED)
     public Product create(@RequestBody Product product) {
 
-        boolean existence = productRepository.findAll().contains(product);
-        if (!existence) {
-            productRepository.save(product);
-        } else {
-            throw new ResourceAlreadyExistsException("Product is already exists");
+//        boolean existence = productRepository.findAll().contains(product);
+//        if (!existence) {
+//            productRepository.save(product);
+//        } else {
+//            throw new ResourceAlreadyExistsException("Product is already exists");
+//        }
+//        return product;
+
+        if (productRepository.findAll().contains(product)) {
+            throw new ResourceAlreadyExistsException("Product " + product.getTitle() + " already exists");
         }
-        return product;
+        return productRepository.save(product);
     }
     // END
 
