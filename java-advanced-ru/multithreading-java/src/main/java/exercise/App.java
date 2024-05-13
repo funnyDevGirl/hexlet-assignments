@@ -13,9 +13,9 @@ class App {
         MinThread threadMin = new MinThread(numbers);
 
         Map<String, Integer> result = new HashMap<>();
-        System.out.println("INFO: Thread " + threadMax.getName() + " started");
+        LOGGER.info("INFO: Thread " + threadMax.getName() + " started");
         threadMax.start();
-        System.out.println("INFO: Thread " + threadMin.getName() + " started");
+        LOGGER.info("INFO: Thread " + threadMin.getName() + " started");
         threadMin.start();
 
         try {
@@ -24,8 +24,8 @@ class App {
         } catch (InterruptedException e) {
             System.out.println("Thread interrupted");
         }
-        System.out.println("INFO: Thread " + threadMax.getName() + " finished");
-        System.out.println("INFO: Thread " + threadMin.getName() + " finished");
+        LOGGER.info("INFO: Thread " + threadMax.getName() + " finished");
+        LOGGER.info("INFO: Thread " + threadMin.getName() + " finished");
 
         result.put("min", threadMin.getMinNumber());
         result.put("max", threadMax.getMaxNumber());
